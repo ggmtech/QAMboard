@@ -1,0 +1,273 @@
+---
+title: "The presention on presentaion"
+subtitle: " The subtitle for the presentiton"
+auther: ' Diesel Wing'
+date: "12/06/2019"
+output:
+  revealjs::revealjs_presentation:
+#    center: yes # centres vertically
+#    css: gk_css.css # works but was badly desinged
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 10
+    highlight: "pygments" # NULL, "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", and "haddock"
+    toc: TRUE  # but not coming
+#    incremental: yes  # better use -<
+    reveal_options:
+      previewLinks: yes
+      slideNumber: yes
+    self_contained: no
+   # smart: TRUE
+    theme: "solarized" # "default", "simple", "sky", "beige", "serif", "solarized", "blood", "moon", "night", "black", "league" or "white"
+    transition: "default" #"default", "fade", "slide", "convex", "concave", "zoom" or "none".
+    background_transition: "convex" #"default", "fade", "slide", "convex", "concave", "zoom" or "none"
+
+#  prettydoc::html_pretty:
+#    highlight: github
+#    theme: cayman
+  reveal_plugins:
+    #  - notes
+    #  - search
+    #  - chalkboard
+---
+
+<!---
+# override global transition by data-transition attribute, for example:
+## Use a zoom transition {data-transition="zoom"}
+## faster speed {data-transition-speed="fast"}
+
+## Fade in, Slide out {data-transition="slide-in fade-out"}
+## Slide in, Fade out {data-transition="fade-in slide-out"}
+
+## CSS color background {data-background=#ff0000}
+## image background {data-background="background.jpeg"}
+## Video background {data-background-video="background.mp4"}
+## Webpage background {data-background-iframe="https://example.com"}
+--->
+
+
+# Reason for this presentation
+
+The purpose is :
+
+  > - Keep workable templete for use
+  > - Keep on improving it in github
+  
+# optons in r chunks
+
+- cache: cache results for future knits (default = FALSE)
+- cache.path: directory (default = “cache/”)
+- child: file(s) to knit and then include (default = NULL)
+- collapse: collapse all output into single block (default = FALSE)
+- comment: prefix for each line of results (default = ‘##’)
+- dependson: chunk dependencies for caching (default = NULL)
+
+## Other normal 
+
+- echo: (default = TRUE) ;
+- engine: (default = ‘R’)
+- error:  (default = FALSE)
+- warning: display code warnings in document (default = TRUE)
+- message: (default = TRUE)
+- eval:  (default = TRUE)
+
+## other 3
+- results=asis: passthrough results
+- results=hide: do not display results
+- results=hold: put all results below all code
+- tidy: tidy code for display (default = FALSE)
+
+
+
+## figures
+
+- fig.align: ‘lef’, ‘right’, or ‘center’ (default = ‘default’)
+- fig.cap: figure caption as character string (default = NULL)
+- fig.height, fig.width: Dimensions of plots in inches
+- highlight: highlight source code (default = TRUE)
+- include: Include chunk in doc after running (default = TRUE)
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+---
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+# Tables
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+data <- faithful[1:4, ]
+knitr::kable(data, caption = 'Table with kable')
+```
+
+## Another talbe
+
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+
+data <- faithful[1:4, ]
+print(xtable::xtable(data, caption = 'Table with xtable'), type = 'HTML', 
+      HTML.table.attributes = 'border=0')
+```
+
+## yet another talbe
+
+```{r, echo = FALSE, eval=TRUE, include=TRUE, error=FALSE, warning=FALSE, message=FALSE}
+library(stargazer)
+data <- faithful[1:4, ]
+stargazer::stargazer(data, type = 'HTML', title = 'Table with stargazer')
+
+```
+
+
+
+# A background page {data-background-iframe="https://rdso.indianrailways.gov.in"}
+
+
+
+# CSS color background {data-background=#ff0000 }
+
+ 1. some dummy text 
+ 2. some other text
+ 2. Yet another text
+ 
+# Full size image background {data-background="img/corona19.jpg" } 
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(ggpubr)
+# Grouped Scatter plot with marginal density plots
+ggscatterhist(
+  iris, x = "Sepal.Length", y = "Sepal.Width",
+  color = "Species", size = 3, alpha = 0.6,
+  palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+  margin.params = list(fill = "Species", color = "black", size = 0.2)
+  ) + theme_transparent()
+```  
+
+# Video background {data-background-video="demo.mp4"}
+
+  - This is some text
+  - some onther text
+  - Yet some another text
+  
+# Embed a web page as a background {data-background-iframe="https://example.com"}
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library("ggalt")
+ggplot(mtcars, aes(mpg, wt)) +
+  geom_point( aes(size = qsec , fill = cyl ), alpha = 0.5) +
+  scale_size(range = c( 0.5,  12 ))  # Adjust the range of points size
+```  
+
+  1. Depite bg another text
+  2. some another text
+
+# Slide with R Code and Output
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library("ggalt")
+circle.df <- iris %>% filter(Species == "setosa")
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+    geom_point(aes(colour = Species)) + 
+  geom_encircle(data = circle.df, linetype = 2)
+```
+
+## Slide with Plot
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(ggforce)
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+    geom_point() +
+    facet_zoom(x = Species == "versicolor")
+```
+
+# The top p head
+
+
+
+# Background Three {.SlideClass #SlideID3}
+
+Full screen background
+
+```{r results='asis', echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+
+#makeBG(id='Slide3', 'figure2b.png')
+```
+
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+Sys.setlocale("LC_CTYPE", "russian")
+#st_options(lang = 'ru')
+#Then, to go back to default settings:
+
+Sys.setlocale("LC_CTYPE", "")
+#st_options(lang = "en")
+```
+
+
+
+## table
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+dt <- mtcars[1:5, 1:6]
+
+iris[1:10, ] %>%
+  mutate_if(is.numeric, function(x) {
+    cell_spec(x, bold = T, 
+              color = spec_color(x, end = 0.9),
+              font_size = spec_font_size(x))
+  }) %>%
+  mutate(Species = cell_spec(
+    Species, color = "white", bold = T,
+    background = spec_color(1:10, end = 0.9, option = "A", direction = -1)
+  )) %>%
+  kable(escape = F, align = "c") %>%
+  kable_styling(c("striped", "condensed"), full_width = F)
+
+kable(dt) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "float_right", font_size = 7)
+
+
+```
+
+# some more slide
+
+## combineing formatable with 
+
+```{r, echo = FALSE, eval=TRUE,  error=FALSE, warning=FALSE, message=FALSE}
+library(formattable)
+mtcars[1:5, 1:4] %>%
+  mutate(
+    car = row.names(.),
+    mpg = color_tile("white", "orange")(mpg),
+    cyl = cell_spec(cyl, angle = (1:5)*60, 
+                    background = "red", color = "white", align = "center"),
+    disp = ifelse(disp > 200,
+                  cell_spec(disp, color = "red", bold = T),
+                  cell_spec(disp, color = "green", italic = T)),
+    hp = color_bar("lightgreen")(hp)
+  ) %>%
+  select(car, everything()) %>%
+  kable(escape = F) %>%
+  kable_styling("hover", full_width = F) %>%
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c(" ", "Hello" = 2, "World" = 2))
+```
+
+# Thank you
+
+Thank you very much
